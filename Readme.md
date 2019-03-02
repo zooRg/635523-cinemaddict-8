@@ -1,7 +1,7 @@
 # Личный проект «Киноман» [![Build status][travis-image]][travis-url]
 
 * Студент: [Andrey Strogov](https://up.htmlacademy.ru/ecmascript/8/user/635523).
-* Наставник: `Неизвестно`.
+* Наставник: [Юрий Татаринцев](https://htmlacademy.ru/profile/id235196).
 
 ---
 
