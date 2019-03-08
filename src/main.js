@@ -1,11 +1,19 @@
 // Собираю импорты
 import utilsList from "./utils";
 import {renderFilter, handlePinClick as filterClickListeners} from "./filter-tabs";
-import {CARD_WRAPPER as cardWrap, createCardList as generateList, placeCards, presetExtraFilms as renderAdditionalFilms} from "./card";
+import {
+  CARD_WRAPPER as cardWrap,
+  createCardList as generateList,
+  createTemplateCard,
+  placeCards,
+  presetExtraFilms as renderAdditionalFilms
+} from "./card";
+
 // Объявляю врапперы для элементов разметки
 const FILTER_WRAPPER = document.querySelector(`.main-navigation`);
 const EXTRA_FILMS = document.querySelectorAll(`.films-list--extra .films-list__container`);
-
+// Создаю темплейт карточки
+createTemplateCard();
 // Выполняю стэк
 FILTER_WRAPPER.innerHTML = ``;
 renderFilter();

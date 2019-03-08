@@ -90,11 +90,12 @@
 /*!*********************!*\
   !*** ./src/card.js ***!
   \*********************/
-/*! exports provided: createCardElem, placeCards, createCardList, presetExtraFilms, CARD_WRAPPER */
+/*! exports provided: createTemplateCard, createCardElem, placeCards, createCardList, presetExtraFilms, CARD_WRAPPER */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createTemplateCard", function() { return createTemplateCard; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createCardElem", function() { return createCardElem; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "placeCards", function() { return placeCards; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createCardList", function() { return createCardList; });
@@ -115,8 +116,6 @@ const createTemplateCard = () => {
   document.body.insertBefore(createEmptyTemplate, document.querySelector(`.main`));
 }; // Работаю с инсертом фрагмента в документ.
 
-
-createTemplateCard(); // Функция почти сразу исполняется. В принципе, я думаю, разнице между определением ее как константы с последующим вызовом не имеет разницы с функцией, которая сразу выполнится. В дальнейшем, гипотетически, я могу воспользоваться этой функцией.
 
 const createCardTemp = () => {
   const cardNode = document.querySelector(`#film-card`).content.querySelector(`.film-card`).cloneNode(true);
@@ -317,7 +316,9 @@ __webpack_require__.r(__webpack_exports__);
  // Объявляю врапперы для элементов разметки
 
 const FILTER_WRAPPER = document.querySelector(`.main-navigation`);
-const EXTRA_FILMS = document.querySelectorAll(`.films-list--extra .films-list__container`); // Выполняю стэк
+const EXTRA_FILMS = document.querySelectorAll(`.films-list--extra .films-list__container`); // Создаю темплейт карточки
+
+Object(_card__WEBPACK_IMPORTED_MODULE_2__["createTemplateCard"])(); // Выполняю стэк
 
 FILTER_WRAPPER.innerHTML = ``;
 Object(_filter_tabs__WEBPACK_IMPORTED_MODULE_1__["renderFilter"])();

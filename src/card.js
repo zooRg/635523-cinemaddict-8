@@ -1,5 +1,7 @@
 import utilsList from "./utils";
 import * as mockList from "./get-data.js";
+
+
 // Делаю клоннод подходящей карточки
 const CARD_WRAPPER = document.querySelector(`.films-list .films-list__container`);
 // Объявляю массив для карточек
@@ -10,9 +12,7 @@ const createTemplateCard = () => {
   createEmptyTemplate.content.appendChild(clonedNode);
   document.body.insertBefore(createEmptyTemplate, document.querySelector(`.main`));
 };
-
 // Работаю с инсертом фрагмента в документ.
-createTemplateCard(); // Функция почти сразу исполняется. В принципе, я думаю, разнице между определением ее как константы с последующим вызовом не имеет разницы с функцией, которая сразу выполнится. В дальнейшем, гипотетически, я могу воспользоваться этой функцией.
 const createCardTemp = () => {
   const cardNode = document.querySelector(`#film-card`)
     .content
@@ -58,4 +58,4 @@ const presetExtraFilms = () => {
   });
 };
 
-export {createCardElem, placeCards, createCardList, presetExtraFilms, CARD_WRAPPER};
+export {createTemplateCard, createCardElem, placeCards, createCardList, presetExtraFilms, CARD_WRAPPER};

@@ -7,6 +7,7 @@ const utilsList = {
   getRandFromArr: (arr) => {
     const index = utilsList.getRandomNumber(0, arr.length);
     return arr[index];
+    debugger;
   },
   // Однострочная функция очищающая блок с карточками при клике по табу и лоаду страницы, делаю клоннод с одной из карточек
   clearCanvas: () => {

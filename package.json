@@ -5,12 +5,13 @@
   "description": "Личный проект «Киноман» от HTML Academy",
   "scripts": {
     "build": "webpack",
-    "start": "webpack-dev-server --open",
+    "start": "webpack-dev-server --hot --open",
     "eslint": "eslint src/**/*.js",
     "test": "npm run eslint"
   },
   "devDependencies": {
     "@babel/core": "7.3.4",
+    "@babel/preset-env": "7.3.4",
     "babel-loader": "8.0.5",
     "eslint": "5.13.0",
     "eslint-config-htmlacademy": "0.5.2",

@@ -4,6 +4,7 @@ const MOCK_LIST = {
   "pictures": [`blue-blazes`, `fuga-da-new-york`, `accused`, `blackmail`, `moonrise`],
   "names": [`Incredibles 2`, `The Assassination Of Jessie James By The Coward Robert Ford`],
 };
+
 // Массив с данными фильтра
 const FILTER_LIST = [
   {
