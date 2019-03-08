@@ -1,4 +1,8 @@
+import utilsList from "./utils";
+import * as mockList from "./get-data.js";
 // Делаю клоннод подходящей карточки
+const CARD_WRAPPER = document.querySelector(`.films-list .films-list__container`);
+// Объявляю массив для карточек
 const createTemplateCard = () => {
   const createEmptyTemplate = document.createElement(`template`);
   createEmptyTemplate.id = `film-card`;
@@ -7,8 +11,8 @@ const createTemplateCard = () => {
   document.body.insertBefore(createEmptyTemplate, document.querySelector(`.main`));
 };
 
-// Работаю с инсертом фрагмента в документ
-createTemplateCard();
+// Работаю с инсертом фрагмента в документ.
+createTemplateCard(); // Функция почти сразу исполняется. В принципе, я думаю, разнице между определением ее как константы с последующим вызовом не имеет разницы с функцией, которая сразу выполнится. В дальнейшем, гипотетически, я могу воспользоваться этой функцией.
 const createCardTemp = () => {
   const cardNode = document.querySelector(`#film-card`)
     .content
@@ -25,5 +29,33 @@ const createCardElem = (arrList) => {
   cardTemplate.querySelector(`.film-card__poster`).src = `./images/posters/${arrList.picture}.jpg`;
   return cardTemplate;
 };
+// Собираю все в объект
+/* @param Количество карточек */
+const createCardList = (repeats) => {
+  for (let i = 0; i < repeats; i++) {
+    let card = createCardElem(mockList.generateData(mockList.MOCK_LIST));
+    utilsList.cardList.push(card);
+  }
+  return utilsList.cardList;
+};
+// Размещаю в дом
+/* @param Принимает нодлист из карточек
+*  @param Принимает ноду, в которую вставляет карточки */
+const placeCards = (arr, parentNode) => {
+  for (let i = 0; i < arr.length; i++) {
+    parentNode.appendChild(arr[i]);
+  }
+};
+// На лоаде карточек вычищаю ненужные ноды;
+const presetExtraFilms = () => {
+  const itemsNode = document.querySelectorAll(`.films-list--extra .films-list__container .film-card`);
+  itemsNode.forEach((node) => {
+    node.classList.add(`film-card--no-controls`);
+    let nodeDescription = node.querySelector(`.film-card__description`);
+    let nodeActions = node.querySelector(`.film-card__controls`);
+    node.removeChild(nodeDescription);
+    node.removeChild(nodeActions);
+  });
+};
 
-export {createCardElem};
+export {createCardElem, placeCards, createCardList, presetExtraFilms, CARD_WRAPPER};
