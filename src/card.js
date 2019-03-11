@@ -28,7 +28,7 @@ const createCardElem = (arrList) => {
   cardTemplate.querySelector(`.film-card__title`).innerHTML = arrList.name;
   cardTemplate.querySelector(`.film-card__poster`).src = `./images/posters/${arrList.picture}.jpg`;
   cardTemplate.querySelector(`.film-card__year`).innerHTML = arrList.year;
-  cardTemplate.querySelector(`.film-card__duration`).innerHTML = `${Math.floor(arrList.dur / utilsList.MIN_IN_HOUR)}h&nbsp;${arrList.dur - (Math.floor(arrList.dur / utilsList.MIN_IN_HOUR) * utilsList.MIN_IN_HOUR)}m`
+  cardTemplate.querySelector(`.film-card__duration`).innerHTML = `${Math.floor(arrList.dur / utilsList.MIN_IN_HOUR)}h&nbsp;${arrList.dur - (Math.floor(arrList.dur / utilsList.MIN_IN_HOUR) * utilsList.MIN_IN_HOUR)}m`;
   cardTemplate.querySelector(`.film-card__comments`).innerHTML = `${arrList.comments} comments`;
   cardTemplate.querySelector(`.film-card__description`).innerHTML = arrList.description;
   cardTemplate.querySelector(`.film-card__genre`).innerHTML = arrList.genre;
