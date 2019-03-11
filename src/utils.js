@@ -2,6 +2,11 @@
 
 const CARD_WRAPPER = document.querySelector(`.films-list .films-list__container`);
 const utilsList = {
+  KEY_CODE: {
+    ENTER: 13,
+    ESC: 27,
+  },
+  MIN_IN_HOUR: 60,
   cardList: [],
   getRandomNumber: (min, max) => Math.floor(Math.random() * (max - min) + min),
   getRandFromArr: (arr) => {

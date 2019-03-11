@@ -16,7 +16,11 @@ const RESTRICTIONS_LIST = {
   MAX_COMM: 3,
   DESCRIPTION_LEN: 3
 };
-const DESCRIPTION = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet varius magna, non porta ligula feugiat eget. Fusce tristique felis at fermentum pharetra. Aliquam id orci ut lectus varius viverra. Nullam nunc ex, convallis sed finibus eget, sollicitudin eget ante. Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum. Sed blandit, eros vel aliquam faucibus, purus ex euismod diam, eu luctus nunc ante ut dui. Sed sed nisi sed augue convallis suscipit in sed felis. Aliquam erat volutpat. Nunc fermentum tortor ac porta dapibus. In rutrum ac purus sit amet tempus.`;
+const DESCRIPTION = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet varius magna,
+  non porta ligula feugiat eget. Fusce tristique felis at fermentum pharetra. Aliquam id orci ut lectus varius viverra. Nullam nunc ex,
+  convallis sed finibus eget, sollicitudin eget ante. Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum. Sed blandit,
+  eros vel aliquam faucibus, purus ex euismod diam, eu luctus nunc ante ut dui. Sed sed nisi sed augue convallis suscipit in sed felis. Aliquam erat volutpat.
+  Nunc fermentum tortor ac porta dapibus. In rutrum ac purus sit amet tempus.`.split(`.`);
 const MOCK_LIST = {
   "pictures": [
     `blue-blazes`,
@@ -83,7 +87,7 @@ const FILTER_LIST = [
 const getRandomDescription = () => {
   return new Array(RESTRICTIONS_LIST.DESCRIPTION_LEN)
     .fill()
-    .map(() => MOCK_LIST.text[utilsList.getRandomNumber(0, MOCK_LIST.text.length - 1)])
+    .map(() => DESCRIPTION[utilsList.getRandomNumber(0, DESCRIPTION.length - 1)])
     .join(` `);
 };
 
@@ -97,8 +101,9 @@ const generateData = (obj) => {
   data.year = utilsList.getRandomNumber(RESTRICTIONS_LIST.YEAR.MIN, RESTRICTIONS_LIST.YEAR.MAX);
   data.comments = utilsList.getRandomNumber(1, 20);
   data.description = getRandomDescription();
+  data.dur = utilsList.getRandomNumber(RESTRICTIONS_LIST.DUR.MIN, RESTRICTIONS_LIST.DUR.MAX);
   data.rating = utilsList.getRandomNumber(RESTRICTIONS_LIST.RATING.MIN, RESTRICTIONS_LIST.RATING.MAX);
-  console.log(data);
+
   return data;
 };
 
