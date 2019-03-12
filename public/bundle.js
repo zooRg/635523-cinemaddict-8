@@ -130,6 +130,12 @@ const createCardElem = arrList => {
   const cardTemplate = createCardTemp();
   cardTemplate.querySelector(`.film-card__title`).innerHTML = arrList.name;
   cardTemplate.querySelector(`.film-card__poster`).src = `./images/posters/${arrList.picture}.jpg`;
+  cardTemplate.querySelector(`.film-card__year`).innerHTML = arrList.year;
+  cardTemplate.querySelector(`.film-card__duration`).innerHTML = `${Math.floor(arrList.dur / _utils__WEBPACK_IMPORTED_MODULE_0__["default"].MIN_IN_HOUR)}h&nbsp;${arrList.dur - Math.floor(arrList.dur / _utils__WEBPACK_IMPORTED_MODULE_0__["default"].MIN_IN_HOUR) * _utils__WEBPACK_IMPORTED_MODULE_0__["default"].MIN_IN_HOUR}m`;
+  cardTemplate.querySelector(`.film-card__comments`).innerHTML = `${arrList.comments} comments`;
+  cardTemplate.querySelector(`.film-card__description`).innerHTML = arrList.description;
+  cardTemplate.querySelector(`.film-card__genre`).innerHTML = arrList.genre;
+  cardTemplate.querySelector(`.film-card__rating`).innerHTML = arrList.rating;
   return cardTemplate;
 }; // Собираю все в объект
 
@@ -258,9 +264,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils */ "./src/utils.js");
  // Лист переменных данных карточек
 
+const RESTRICTIONS_LIST = {
+  RATING: {
+    MIN: 1,
+    MAX: 10
+  },
+  YEAR: {
+    MIN: 1971,
+    MAX: 2019
+  },
+  DUR: {
+    MIN: 90,
+    MAX: 210
+  },
+  MAX_COMM: 3,
+  DESCRIPTION_LEN: 3
+};
+const DESCRIPTION = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet varius magna,
+  non porta ligula feugiat eget. Fusce tristique felis at fermentum pharetra. Aliquam id orci ut lectus varius viverra. Nullam nunc ex,
+  convallis sed finibus eget, sollicitudin eget ante. Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum. Sed blandit,
+  eros vel aliquam faucibus, purus ex euismod diam, eu luctus nunc ante ut dui. Sed sed nisi sed augue convallis suscipit in sed felis. Aliquam erat volutpat.
+  Nunc fermentum tortor ac porta dapibus. In rutrum ac purus sit amet tempus.`.split(`.`);
 const MOCK_LIST = {
   "pictures": [`blue-blazes`, `fuga-da-new-york`, `accused`, `blackmail`, `moonrise`],
-  "names": [`Incredibles 2`, `The Assassination Of Jessie James By The Coward Robert Ford`]
+  "names": [`Incredibles 2`, `The Assassination Of Jessie James By The Coward Robert Ford`, `The Inception`, `Limitless`, `Tusk`, `A Clockwork Orange`, `The Shining`, `True Detective`, `Green Mile`, `The King's Speech`, `King Lion`, `Leon`, `The Shawshank Redemption`, `Gladiator`, `Green Book`],
+  "genres": [`Action`, `Drama`, `Detective`, `Animation`, `Biography`, `Fantasy`]
 }; // Массив с данными фильтра
 
 const FILTER_LIST = [{
@@ -283,14 +311,25 @@ const FILTER_LIST = [{
   "text": `Stats`,
   "prefix": `additional`,
   "id": `#stats`
-}]; //  Генерирую мок и прогоняю по кейсам для дедлайнов и шаблона оформления
+}];
+
+const getRandomDescription = () => {
+  return new Array(RESTRICTIONS_LIST.DESCRIPTION_LEN).fill().map(() => DESCRIPTION[_utils__WEBPACK_IMPORTED_MODULE_0__["default"].getRandomNumber(0, DESCRIPTION.length - 1)]).join(` `);
+}; //  Генерирую мок и прогоняю по кейсам для дедлайнов и шаблона оформления
 
 /* @param принимает на вход мок данных */
+
 
 const generateData = obj => {
   let data = {};
   data.picture = _utils__WEBPACK_IMPORTED_MODULE_0__["default"].getRandFromArr(obj.pictures);
   data.name = _utils__WEBPACK_IMPORTED_MODULE_0__["default"].getRandFromArr(obj.names);
+  data.genre = _utils__WEBPACK_IMPORTED_MODULE_0__["default"].getRandFromArr(obj.genres);
+  data.year = _utils__WEBPACK_IMPORTED_MODULE_0__["default"].getRandomNumber(RESTRICTIONS_LIST.YEAR.MIN, RESTRICTIONS_LIST.YEAR.MAX);
+  data.comments = _utils__WEBPACK_IMPORTED_MODULE_0__["default"].getRandomNumber(1, 20);
+  data.description = getRandomDescription();
+  data.dur = _utils__WEBPACK_IMPORTED_MODULE_0__["default"].getRandomNumber(RESTRICTIONS_LIST.DUR.MIN, RESTRICTIONS_LIST.DUR.MAX);
+  data.rating = _utils__WEBPACK_IMPORTED_MODULE_0__["default"].getRandomNumber(RESTRICTIONS_LIST.RATING.MIN, RESTRICTIONS_LIST.RATING.MAX);
   return data;
 };
 
@@ -322,6 +361,7 @@ Object(_card__WEBPACK_IMPORTED_MODULE_2__["createTemplateCard"])(); // Выпо�
 
 FILTER_WRAPPER.innerHTML = ``;
 Object(_filter_tabs__WEBPACK_IMPORTED_MODULE_1__["renderFilter"])();
+_utils__WEBPACK_IMPORTED_MODULE_0__["default"].clearCanvas();
 _utils__WEBPACK_IMPORTED_MODULE_0__["default"].cardList = [];
 Object(_card__WEBPACK_IMPORTED_MODULE_2__["createCardList"])(_utils__WEBPACK_IMPORTED_MODULE_0__["default"].getRandomNumber(2, 6));
 Object(_card__WEBPACK_IMPORTED_MODULE_2__["placeCards"])(_utils__WEBPACK_IMPORTED_MODULE_0__["default"].cardList, _card__WEBPACK_IMPORTED_MODULE_2__["CARD_WRAPPER"]); // Форыч, очищающий стек карточек, генерирует новые и вставляет их во врапперы. Думал сделать через копирование массива и его слайс, но скриптовая часть сохраняет ссылки на ноды и в итоге они туда-сюда скачут по блокам.
@@ -350,6 +390,11 @@ __webpack_require__.r(__webpack_exports__);
 // Утилитарные функции получения рандомные значений для мока
 const CARD_WRAPPER = document.querySelector(`.films-list .films-list__container`);
 const utilsList = {
+  KEY_CODE: {
+    ENTER: 13,
+    ESC: 27
+  },
+  MIN_IN_HOUR: 60,
   cardList: [],
   getRandomNumber: (min, max) => Math.floor(Math.random() * (max - min) + min),
   getRandFromArr: arr => {

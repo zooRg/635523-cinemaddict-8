@@ -17,6 +17,7 @@ createTemplateCard();
 // Выполняю стэк
 FILTER_WRAPPER.innerHTML = ``;
 renderFilter();
+utilsList.clearCanvas();
 utilsList.cardList = [];
 generateList(utilsList.getRandomNumber(2, 6));
 placeCards(utilsList.cardList, cardWrap);
